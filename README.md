@@ -6,9 +6,9 @@ will also contain subfolders for each app. Folder structure will be like:
 
 <pre>
 	part1
-		app1
-		app2
+	  app1
+	  app2
 	part2
-		app1
+	  app1
 	part3
 </pre>
