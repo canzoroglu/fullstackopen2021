@@ -8,6 +8,7 @@ const corsOptions = {
   }
 
 app.use(cors(corsOptions));
+app.use(express.json());
 
 const data = {
     "persons":[
@@ -34,9 +35,31 @@ const data = {
     ]
   }
   
+let id = 5
 
-app.get('/', (req, res) => {
+app.get('/persons', (req, res) => {
   res.json(data)
+})
+
+app.post('/persons', (req, res) => {
+  const newData = {...req.body, id:id++}
+  data.persons.push(newData)
+  res.json(newData)
+})
+
+app.put('/persons/:id', (req, res) => {
+  const newData = data.persons.map(person =>{ 
+    if(person.id == req.params.id) {
+      person.number = req.body.number
+      return person
+    }
+    else return person
+  })
+  res.json(newData)
+})
+
+app.delete('/persons/:id', (req, res) => {
+  res.json(data.persons.filter(person => person.id != req.params.id))
 })
 
 app.listen(port, () => {
